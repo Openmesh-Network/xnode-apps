@@ -1,0 +1,1 @@
+services.ollama.loadModels = [ "llama3.1" ];

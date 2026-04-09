@@ -1,0 +1,2 @@
+services.vaultwarden.config.DOMAIN = "https://vaultwarden.openmesh.network";
+services.vaultwarden.config.SIGNUPS_ALLOWED = true;

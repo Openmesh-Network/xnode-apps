@@ -1,0 +1,116 @@
+{
+  "nodes": {
+    "near-cli": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1771404286,
+        "narHash": "sha256-c1rUEBhGgXfDKHN6DUbfuccru/lLr3shtsHzIUs30Xs=",
+        "owner": "Openmesh-Network",
+        "repo": "near-cli",
+        "rev": "aaad52dfcc7299392e159d22162b352e3c6837c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "repo": "near-cli",
+        "type": "github"
+      }
+    },
+    "near-validator": {
+      "inputs": {
+        "near-cli": "near-cli",
+        "nixpkgs": "nixpkgs_2",
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1775068746,
+        "narHash": "sha256-noly1r1bI5G9uQ5E+I5lagiS5ZCzGp7I6e7zdRLhOdw=",
+        "owner": "Openmesh-Network",
+        "repo": "near-validator",
+        "rev": "cb36da7dbcbc4f7869690601d8ad427f2abaddc2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "repo": "near-validator",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1771008912,
+        "narHash": "sha256-gf2AmWVTs8lEq7z/3ZAsgnZDhWIckkb+ZnAo5RzSxJg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a82ccc39b39b621151d6732718e3e250109076fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1767313136,
+        "narHash": "sha256-16KkgfdYqjaeRGBaYsNrhPRRENs0qzkQVUooNHtoy2w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ac62194c3917d5f474c1a844b6fd6da2db95077d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "near-validator": "near-validator",
+        "nixpkgs": [
+          "near-validator",
+          "nixpkgs"
+        ]
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

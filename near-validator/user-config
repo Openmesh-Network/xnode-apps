@@ -1,0 +1,3 @@
+services.near-validator.pool.id = "openmesh";
+services.near-validator.pool.version = "pool";
+services.near-validator.pinger.enable = false;

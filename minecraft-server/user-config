@@ -1,0 +1,1 @@
+services.minecraft-server.serverProperties.motd = "Minecraft server running on Xnode!";

@@ -1,0 +1,2 @@
+# Or replace with and `services.openvscode-server.connectionToken = "MYSUPERSECRETTOKEN";` and put /?tkn=MYSUPERSECRETTOKEN in the address bar
+services.openvscode-server.withoutConnectionToken = true;

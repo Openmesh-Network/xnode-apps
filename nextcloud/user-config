@@ -1,0 +1,4 @@
+services.nextcloud.hostName = "nextcloud.openmesh.network";
+services.nextcloud.config.adminpassFile = builtins.toString (
+    pkgs.writeText "nextcloud.password" "xnode"
+);
