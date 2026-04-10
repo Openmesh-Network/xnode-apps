@@ -2,6 +2,10 @@
   inputs = {
     openclaw.url = "github:openclaw/nix-openclaw";
     nixpkgs.follows = "openclaw/nixpkgs";
+    xnodeos = {
+      url = "github:Openmesh-Network/xnodeos/WIP";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
@@ -11,6 +15,7 @@
         {
           inputs = [
             inputs.openclaw.nixosModules.openclaw-gateway
+            inputs.xnodeos.nixosModules.app
           ];
 
           config = {

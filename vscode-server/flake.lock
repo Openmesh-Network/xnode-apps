@@ -1,12 +1,34 @@
 {
   "nodes": {
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "xnodeos",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768920986,
+        "narHash": "sha256-CNzzBsRhq7gg4BMBuTDObiWDH/rFYHEuDRVOwCcwXw4=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "de5708739256238fb912c62f03988815db89ec9a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "latest",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1775423009,
-        "narHash": "sha256-hvNLo3SaIwi6+Cm5NMLyFQYJrYagpsYap4EfQe9CQpc=",
-        "rev": "68d8aa3d661f0e6bd5862291b5bb263b2a6595c9",
+        "lastModified": 1775710090,
+        "narHash": "sha256-WGjBfvXv/mcg5yBg+AtK1Q3FHyXfjAAeJROmg7DLYfM=",
+        "rev": "4c1018dae018162ec878d42fec712642d214fdfa",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre975402.68d8aa3d661f/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre977467.4c1018dae018/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -15,7 +37,108 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "xnodeos": "xnodeos"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "xnode-auth": {
+      "inputs": {
+        "nixpkgs": [
+          "xnodeos",
+          "nixpkgs"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1775225981,
+        "narHash": "sha256-9+t7/xjW2XmGwx5E2foWNH7pjvMj190nsgZu+rHM3CU=",
+        "owner": "Openmesh-Network",
+        "repo": "xnode-auth",
+        "rev": "e95f1961341c8fc1732e946fbe081edafef93cc2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "ref": "dev",
+        "repo": "xnode-auth",
+        "type": "github"
+      }
+    },
+    "xnode-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "xnodeos",
+          "nixpkgs"
+        ],
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1775738547,
+        "narHash": "sha256-/QQpuXt8oiJtCQCiEebR1HSjJqeYDGm1khd0RoX143E=",
+        "owner": "Openmesh-Network",
+        "repo": "xnode-manager",
+        "rev": "5275b9ebbdbb3a2fc7ab9d74f7fcdf118c0d2605",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "ref": "WIP",
+        "repo": "xnode-manager",
+        "type": "github"
+      }
+    },
+    "xnodeos": {
+      "inputs": {
+        "disko": "disko",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "xnode-auth": "xnode-auth",
+        "xnode-manager": "xnode-manager"
+      },
+      "locked": {
+        "lastModified": 1775810939,
+        "narHash": "sha256-+SgtLOZGfZV1vjz+pm25NNXqrlD+L+8FZ8Iqse2H4D0=",
+        "owner": "Openmesh-Network",
+        "repo": "xnodeos",
+        "rev": "c1bd77918e2d19134f3d58350283c6212e444d4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "ref": "WIP",
+        "repo": "xnodeos",
+        "type": "github"
       }
     }
   },

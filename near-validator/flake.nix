@@ -2,6 +2,10 @@
   inputs = {
     near-validator.url = "github:Openmesh-Network/near-validator";
     nixpkgs.follows = "near-validator/nixpkgs";
+    xnodeos = {
+      url = "github:Openmesh-Network/xnodeos/WIP";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
@@ -11,6 +15,7 @@
         {
           inputs = [
             inputs.near-validator.nixosModules.default
+            inputs.xnodeos.nixosModules.app
           ];
 
           config = {

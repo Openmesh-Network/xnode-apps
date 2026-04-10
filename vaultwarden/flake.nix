@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    xnodeos = {
+      url = "github:Openmesh-Network/xnodeos/WIP";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
@@ -8,6 +12,10 @@
       default =
         { pkgs, ... }@args:
         {
+          inputs = [
+            inputs.xnodeos.nixosModules.app
+          ];
+
           config = {
             services.vaultwarden.enable = true;
             services.vaultwarden.config.ROCKET_ADDRESS = "0.0.0.0";
