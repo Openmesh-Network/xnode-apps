@@ -13,7 +13,7 @@
       default =
         { pkgs, ... }@args:
         {
-          inputs = [
+          imports = [
             inputs.openclaw.nixosModules.openclaw-gateway
             inputs.xnodeos.nixosModules.app
           ];

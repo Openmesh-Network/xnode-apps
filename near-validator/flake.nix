@@ -13,7 +13,7 @@
       default =
         { pkgs, ... }@args:
         {
-          inputs = [
+          imports = [
             inputs.near-validator.nixosModules.default
             inputs.xnodeos.nixosModules.app
           ];

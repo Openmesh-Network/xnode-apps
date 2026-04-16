@@ -12,7 +12,7 @@
       default =
         { pkgs, ... }@args:
         {
-          inputs = [
+          imports = [
             inputs.xnodeos.nixosModules.app
           ];
 
