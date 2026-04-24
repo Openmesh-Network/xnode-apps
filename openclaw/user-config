@@ -3,5 +3,5 @@ services.openclaw-gateway.config.channels.telegram.tokenFile = builtins.toString
   pkgs.writeText "openclaw-telegram.token" "PASTE TOKEN HERE" # your Telegram token: https://t.me/BotFather
 );
 services.openclaw-gateway.config.channels.telegram.allowFrom = [ 12345678 ]; # your Telegram user ID: https://t.me/userinfobot
-services.openclaw-gateway.config.agents.defaults.model.primary = "ollama/qwen2.5:0.5b";
+services.openclaw-gateway.config.agents.defaults.model.primary = "provider/model-name";
 services.openclaw-gateway.environment.OLLAMA_API_KEY = "local";

@@ -1,1 +1,1 @@
-services.ollama.loadModels = [ "llama3.1" ];
+services.ollama.loadModels = [ ];
