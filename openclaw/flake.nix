@@ -19,6 +19,13 @@
           ];
 
           config = {
+            xnode.manager.cache = [
+              {
+                location = "https://cache.garnix.io";
+                public-keys = [ "CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+              }
+            ];
+
             services.openclaw-gateway.enable = true;
             services.openclaw-gateway.package =
               inputs.openclaw.packages.${pkgs.stdenv.hostPlatform.system}.openclaw-gateway;

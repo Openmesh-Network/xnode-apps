@@ -19,6 +19,13 @@
           ];
 
           config = {
+            xnode.manager.cache = [
+              {
+                location = "https://openmesh.cachix.org";
+                public-keys = [ "du4NDeMWxcX8T5GddfuD0s/Tosl3+6b+T2+CLKHgXvQ=" ];
+              }
+            ];
+
             services.near-validator.enable = true;
 
             networking.firewall.allowedTCPPorts = [

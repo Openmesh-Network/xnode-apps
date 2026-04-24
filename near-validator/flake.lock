@@ -219,11 +219,11 @@
         "xnode-manager": "xnode-manager"
       },
       "locked": {
-        "lastModified": 1776947549,
-        "narHash": "sha256-TDxUVRlFAM87GlapkfFlA0wJmw+IJ6yEnAKIRGDhXhE=",
+        "lastModified": 1777017443,
+        "narHash": "sha256-DbtxqEFtybF6lG4U0DBKEQzp/0FT6jexCiqqHIQn9jI=",
         "owner": "Openmesh-Network",
         "repo": "xnodeos",
-        "rev": "1e7219132fc8828c8266a2d99df82236162d158a",
+        "rev": "70bc0aac5ae82bfbb6fbaa8e18af8f2835ab6a4e",
         "type": "github"
       },
       "original": {
