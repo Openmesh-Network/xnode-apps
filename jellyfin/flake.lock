@@ -103,11 +103,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1777271024,
-        "narHash": "sha256-WFBoDLpEtswsNVsTr0i1ngaDI37m4+cBhDFkBZWY+3c=",
+        "lastModified": 1777305064,
+        "narHash": "sha256-H9VpZgrLk2sj3Eoxwbiq9bzgqpvQ2XDA97akiYD/sbc=",
         "owner": "Openmesh-Network",
         "repo": "xnode-manager",
-        "rev": "2160c724c5ec0d1c3168728b4615524f716747f0",
+        "rev": "e9d760eb09fb83e954132ba11c202cea62e00f9b",
         "type": "github"
       },
       "original": {
@@ -127,11 +127,11 @@
         "xnode-manager": "xnode-manager"
       },
       "locked": {
-        "lastModified": 1777290687,
-        "narHash": "sha256-8IwD98/si/X2LENokzR01E5zMxaigdqrXJ61irU3fPw=",
+        "lastModified": 1777307504,
+        "narHash": "sha256-61n1b76ZdqpYrGfSipoWTf5K982Do3svSBqc0nipk2Y=",
         "owner": "Openmesh-Network",
         "repo": "xnodeos",
-        "rev": "330bf5bd5dc6ec6ec1942f57f3ee5d2d31fe6159",
+        "rev": "a342c52b750590a86376f7df418c002b15131534",
         "type": "github"
       },
       "original": {
