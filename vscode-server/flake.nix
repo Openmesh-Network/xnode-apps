@@ -21,6 +21,17 @@
             services.openvscode-server.host = "0.0.0.0";
 
             networking.firewall.allowedTCPPorts = [ args.config.services.openvscode-server.port ];
+
+            xnode.manager = {
+              expose = {
+                subdomain = "code";
+                http."/" = {
+                  location = {
+                    port = args.config.services.openvscode-server.port;
+                  };
+                };
+              };
+            };
           };
         };
     };

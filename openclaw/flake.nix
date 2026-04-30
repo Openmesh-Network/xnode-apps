@@ -19,19 +19,20 @@
           ];
 
           config = {
-            xnode.manager.cache = [
-              {
-                location = "https://cache.garnix.io";
-                public-keys = [ "CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-              }
-            ];
-
             services.openclaw-gateway.enable = true;
             services.openclaw-gateway.package =
               inputs.openclaw.packages.${pkgs.stdenv.hostPlatform.system}.openclaw-gateway;
             services.openclaw-gateway.config.gateway.mode = "local";
             services.openclaw-gateway.config.gateway.auth.token =
               "69152a9fff0cf22cff72ec21d7324c997cdf435e4ec5bde9";
+            xnode.manager = {
+              cache = [
+                {
+                  location = "https://cache.garnix.io";
+                  public-keys = [ "CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+                }
+              ];
+            };
           };
         };
     };

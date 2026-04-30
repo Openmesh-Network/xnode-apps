@@ -19,14 +19,16 @@
           ];
 
           config = {
-            xnode.manager.cache = [
-              {
-                location = "https://cache.garnix.io";
-                public-keys = [ "CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-              }
-            ];
-
             services.hermes-agent.enable = true;
+
+            xnode.manager = {
+              cache = [
+                {
+                  location = "https://cache.garnix.io";
+                  public-keys = [ "CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+                }
+              ];
+            };
           };
         };
     };
