@@ -35,7 +35,7 @@
               services.xnode-reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
-                    domain = "localhost";
+                    domain = args.config.services.openvscode-server.host;
                     port = args.config.services.openvscode-server.port;
                   }
                 ];

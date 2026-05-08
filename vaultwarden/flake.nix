@@ -31,6 +31,7 @@
             in
             {
               services.vaultwarden.enable = true;
+              services.vaultwarden.config.ROCKET_ADDRESS = "127.0.0.1";
               services.vaultwarden.config.ROCKET_PORT = 8222;
               services.vaultwarden.dbBackend = "postgresql";
               services.vaultwarden.configurePostgres = true;
@@ -38,7 +39,7 @@
               services.xnode-reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
-                    domain = "localhost";
+                    domain = args.config.services.vaultwarden.config.ROCKET_ADDRESS;
                     port = args.config.services.vaultwarden.config.ROCKET_PORT;
                   }
                 ];

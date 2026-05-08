@@ -35,7 +35,7 @@
               services.xnode-reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
-                    domain = "localhost";
+                    domain = "127.0.0.1";
                     port = 8096; # https://jellyfin.org/docs/general/post-install/networking/
                   }
                 ];

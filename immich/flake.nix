@@ -35,7 +35,7 @@
               services.xnode-reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
-                    domain = "localhost";
+                    domain = args.config.services.immich.host;
                     port = args.config.services.immich.port;
                   }
                 ];

@@ -32,11 +32,18 @@
             {
               services.ollama.enable = true;
               services.ollama.user = "ollama";
+              services.ollama.host = "127.0.0.1";
+              services.nginx.virtualHosts.${domain}.locations."/" = {
+                recommendedProxySettings = false; # Sets Host which breaks our custom Host
+                extraConfig = ''
+                  proxy_set_header Host ${args.config.services.ollama.host}:${builtins.toString args.config.services.ollama.port};
+                '';
+              };
 
               services.xnode-reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
-                    domain = "localhost";
+                    domain = args.config.services.ollama.host;
                     port = args.config.services.ollama.port;
                   }
                 ];
