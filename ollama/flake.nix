@@ -31,6 +31,7 @@
             in
             {
               services.ollama.enable = true;
+              services.ollama.package = args.lib.mkDefault pkgs.ollama-vulkan;
               services.ollama.user = "ollama";
               services.ollama.host = "127.0.0.1";
               services.nginx.virtualHosts.${domain}.locations."/" = {
@@ -62,6 +63,34 @@
                     };
                   };
                   paths = builtins.attrNames args.config.xnode.reverse-proxy.https.${domain};
+                };
+              };
+
+              xnode.manager = {
+                permission = {
+                  container = {
+                    bind = {
+                      "/dev/dri" = {
+                        path = "/dev/dri";
+                        readonly = false;
+                      };
+                    };
+                    device = {
+                      policy = "closed";
+                      allow = {
+                        "char-drm" = {
+                          read = true;
+                          write = true;
+                          mknod = false;
+                        };
+                      };
+                    };
+                    extra_args = [
+                      "--network-veth"
+                      "--private-users=managed"
+                      "--private-users-ownership=foreign"
+                    ];
+                  };
                 };
               };
             };

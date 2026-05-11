@@ -1,0 +1,147 @@
+{
+  "nodes": {
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "xnodeos",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768920986,
+        "narHash": "sha256-CNzzBsRhq7gg4BMBuTDObiWDH/rFYHEuDRVOwCcwXw4=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "de5708739256238fb912c62f03988815db89ec9a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "latest",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1777954456,
+        "narHash": "sha256-qeRNZKcA0igTdRVnBe6hyo49CqxME92s4G8Sr78ARJw=",
+        "rev": "549bd84d6279f9852cae6225e372cc67fb91a4c1",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre992384.549bd84d6279/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "xnodeos": "xnodeos"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "xnode-auth": {
+      "inputs": {
+        "nixpkgs": [
+          "xnodeos",
+          "nixpkgs"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1778244024,
+        "narHash": "sha256-A2EZxoDGJ7XArv/SU33TAgH9TY6mHvutOKu+WK/IjTU=",
+        "owner": "Openmesh-Network",
+        "repo": "xnode-auth",
+        "rev": "f2a9fa8721645b69439fd0e2619ebf8acadc409a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "ref": "dev",
+        "repo": "xnode-auth",
+        "type": "github"
+      }
+    },
+    "xnode-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "xnodeos",
+          "nixpkgs"
+        ],
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1778092653,
+        "narHash": "sha256-t1Mbxv3KYtqfx2aIxDmbnHkYDY0M54FDYNrnHnC2/28=",
+        "owner": "Openmesh-Network",
+        "repo": "xnode-manager",
+        "rev": "48796aa4c884e173f5e2995ffc86cce812125ce1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "ref": "WIP",
+        "repo": "xnode-manager",
+        "type": "github"
+      }
+    },
+    "xnodeos": {
+      "inputs": {
+        "disko": "disko",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "xnode-auth": "xnode-auth",
+        "xnode-manager": "xnode-manager"
+      },
+      "locked": {
+        "lastModified": 1778510295,
+        "narHash": "sha256-meGE2owul4TZS/aD0y1N35/SDTUlaAYWNW+XwQ3MYzE=",
+        "owner": "Openmesh-Network",
+        "repo": "xnodeos",
+        "rev": "ebb0263d825957c1324dac1f779817dbd7378078",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Openmesh-Network",
+        "ref": "WIP",
+        "repo": "xnodeos",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
