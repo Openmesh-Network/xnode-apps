@@ -32,7 +32,7 @@
             {
               services.jellyfin.enable = true;
 
-              services.xnode-reverse-proxy.https = args.lib.mkIf (domain != "") {
+              xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
                     domain = "127.0.0.1";
@@ -54,7 +54,7 @@
                     };
                   };
                 };
-                paths = builtins.attrNames args.config.services.xnode-reverse-proxy.https.${domain};
+                paths = builtins.attrNames args.config.xnode.reverse-proxy.https.${domain};
               };
             };
         };

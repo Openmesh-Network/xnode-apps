@@ -36,7 +36,7 @@
               services.vaultwarden.dbBackend = "postgresql";
               services.vaultwarden.configurePostgres = true;
 
-              services.xnode-reverse-proxy.https = args.lib.mkIf (domain != "") {
+              xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
                     domain = args.config.services.vaultwarden.config.ROCKET_ADDRESS;
@@ -57,7 +57,7 @@
                       "owner" = { };
                     };
                   };
-                  paths = builtins.attrNames args.config.services.xnode-reverse-proxy.https.${domain};
+                  paths = builtins.attrNames args.config.xnode.reverse-proxy.https.${domain};
                 };
               };
             };
