@@ -82,7 +82,7 @@
                     description = "llama.cpp model server";
                     after = [ "network.target" ];
                     serviceConfig = {
-                      ExecStart = "${lib.getExe cfg.package} --host \"${cfg.host}\" --port ${builtins.toString cfg.port} --model \"${cfg.model}\"";
+                      ExecStart = "${lib.getExe' cfg.package "llama-server"} --host \"${cfg.host}\" --port ${builtins.toString cfg.port} --model \"${cfg.model}\"";
                       User = "llama-cpp-server";
                       Group = "llama-cpp-server";
                     };
@@ -107,6 +107,8 @@
             in
             {
               services.llama-cpp-server.enable = true;
+
+              hardware.graphics.enable = true;
 
               xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
@@ -139,11 +141,10 @@
                     bind = {
                       "/dev/dri" = {
                         path = "/dev/dri";
-                        readonly = false;
+                        readonly = true;
                       };
                     };
                     device = {
-                      policy = "closed";
                       allow = {
                         "char-drm" = {
                           read = true;

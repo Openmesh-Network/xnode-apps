@@ -41,6 +41,8 @@
                 '';
               };
 
+              hardware.graphics.enable = true;
+
               xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
@@ -72,11 +74,10 @@
                     bind = {
                       "/dev/dri" = {
                         path = "/dev/dri";
-                        readonly = false;
+                        readonly = true;
                       };
                     };
                     device = {
-                      policy = "closed";
                       allow = {
                         "char-drm" = {
                           read = true;

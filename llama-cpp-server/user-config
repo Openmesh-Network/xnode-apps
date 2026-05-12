@@ -1,5 +1,5 @@
 services.llama-cpp-server.model = args.pkgs.fetchurl {
     name = "Qwen3.6-35B-A3B-GGUF";
     url = "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf";
-    hash = args.lib.fakeHash;
+    hash = "sha256-cHpVqKQ5fs3kTeDEmdPmjBrR0kDR2mWCa0lJ0QQ/RFA=";
 };

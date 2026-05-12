@@ -1,4 +1,4 @@
-services.hermes-agent.environment."TELEGRAM_BOT_TOKEN" = PASTE TOKEN HERE"; # your Telegram token: https://t.me/BotFather
+services.hermes-agent.environment."TELEGRAM_BOT_TOKEN" = "PASTE TOKEN HERE"; # your Telegram token: https://t.me/BotFather
 services.hermes-agent.environment."TELEGRAM_ALLOWED_USERS" = "12345678"; # your Telegram user ID: https://t.me/userinfobot
 services.hermes-agent.environment."TELEGRAM_HOME_CHANNEL" = "12345678";
 services.hermes-agent.settings.model.default = "model-name";
