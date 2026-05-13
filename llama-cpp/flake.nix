@@ -22,11 +22,11 @@
                 ...
               }:
               let
-                cfg = config.services.llama-cpp-server;
+                cfg = config.services.llama-cpp;
               in
               {
                 options = {
-                  services.llama-cpp-server = {
+                  services.llama-cpp = {
                     enable = lib.mkEnableOption "llama.cpp model server";
 
                     package = lib.mkOption {
@@ -59,7 +59,7 @@
                     model = lib.mkOption {
                       type = lib.types.path;
                       example = pkgs.fetchurl {
-                        name = "llama-cpp-server-model";
+                        name = "llama-cpp-model";
                         url = "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf";
                         hash = "sha256-cHpVqKQ5fs3kTeDEmdPmjBrR0kDR2mWCa0lJ0QQ/RFA=";
                       };
@@ -97,13 +97,13 @@
                 };
 
                 config = lib.mkIf cfg.enable {
-                  users.groups.llama-cpp-server = { };
-                  users.users.llama-cpp-server = {
+                  users.groups.llama-cpp = { };
+                  users.users.llama-cpp = {
                     isSystemUser = true;
-                    group = "llama-cpp-server";
+                    group = "llama-cpp";
                   };
 
-                  systemd.services.llama-cpp-server = {
+                  systemd.services.llama-cpp = {
                     wantedBy = [ "multi-user.target" ];
                     description = "llama.cpp model server";
                     after = [ "network.target" ];
@@ -121,8 +121,8 @@
                           ];
                         in
                         "${lib.getExe' cfg.package "llama-server"} ${builtins.concatStringsSep " " args}";
-                      User = "llama-cpp-server";
-                      Group = "llama-cpp-server";
+                      User = "llama-cpp";
+                      Group = "llama-cpp";
                     };
                   };
                 };
@@ -144,15 +144,15 @@
                   "";
             in
             {
-              services.llama-cpp-server.enable = true;
+              services.llama-cpp.enable = true;
 
               hardware.graphics.enable = true;
 
               xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
                   {
-                    domain = args.config.services.llama-cpp-server.host;
-                    port = args.config.services.llama-cpp-server.port;
+                    domain = args.config.services.llama-cpp.host;
+                    port = args.config.services.llama-cpp.port;
                   }
                 ];
               };
