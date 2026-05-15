@@ -1,6 +1,7 @@
 {
   inputs = {
-    vllm.url = "github:Openmesh-Network/xnode-packages?dir=vllm/xpu";
+    vllm-omni.url = "github:Openmesh-Network/xnode-packages?dir=vllm-omni/xpu";
+    vllm.follows = "vllm-omni/vllm";
     nixpkgs.follows = "vllm/nixpkgs";
     xnodeos = {
       url = "github:Openmesh-Network/xnodeos/WIP";
@@ -19,7 +20,32 @@
           ];
 
           config = {
+            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (args.lib.getName pkg) [ "intel-ocl" ];
+
             services.vllm.enable = true;
+            services.vllm.package = inputs.vllm-omni.packages.${pkgs.stdenv.hostPlatform.system}.vllm-omni;
+            systemd.services.vllm.environment = {
+              "LD_LIBRARY_PATH" = "/run/opengl-driver/lib:${
+                inputs.vllm-omni.extras.${pkgs.stdenv.hostPlatform.system}.venv
+              }/lib:${pkgs.libsndfile.out}/lib";
+              "LIBRARY_PATH" = "${pkgs.level-zero}/lib";
+              "CPATH" = "${pkgs.level-zero}/include";
+              "CC" = "${pkgs.llvmPackages.stdenv.cc}/bin/cc";
+              "CXX" = "${pkgs.llvmPackages.stdenv.cc}/bin/c++";
+              "UR_L0_ENABLE_RELAXED_ALLOCATION_LIMITS" = "1";
+            };
+
+            hardware.graphics = {
+              enable = true;
+              extraPackages = [
+                pkgs.intel-compute-runtime
+                pkgs.intel-compute-runtime.drivers
+                pkgs.level-zero
+                pkgs.intel-graphics-compiler
+                pkgs.intel-ocl
+                pkgs.ocl-icd
+              ];
+            };
 
             xnode.manager = {
               permission = {
