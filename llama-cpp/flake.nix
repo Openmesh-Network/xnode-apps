@@ -14,120 +14,6 @@
         {
           imports = [
             inputs.xnodeos.nixosModules.app
-            (
-              {
-                config,
-                pkgs,
-                lib,
-                ...
-              }:
-              let
-                cfg = config.services.llama-cpp;
-              in
-              {
-                options = {
-                  services.llama-cpp = {
-                    enable = lib.mkEnableOption "llama.cpp model server";
-
-                    package = lib.mkOption {
-                      type = lib.types.package;
-                      default = pkgs.llama-cpp-vulkan;
-                      example = pkgs.llama-cpp;
-                      description = ''
-                        llama.cpp compatible package to use.
-                      '';
-                    };
-
-                    host = lib.mkOption {
-                      type = lib.types.str;
-                      default = "127.0.0.1";
-                      example = "0.0.0.0";
-                      description = ''
-                        Address to serve the model on.
-                      '';
-                    };
-
-                    port = lib.mkOption {
-                      type = lib.types.port;
-                      default = 8080;
-                      example = 8000;
-                      description = ''
-                        Port to serve the model under.
-                      '';
-                    };
-
-                    model = lib.mkOption {
-                      type = lib.types.path;
-                      example = pkgs.fetchurl {
-                        name = "llama-cpp-model";
-                        url = "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf";
-                        hash = "sha256-cHpVqKQ5fs3kTeDEmdPmjBrR0kDR2mWCa0lJ0QQ/RFA=";
-                      };
-                      description = ''
-                        Model to serve.
-                      '';
-                    };
-
-                    jinja = {
-                      enable = lib.mkEnableOption "jinja template engine" // {
-                        default = true;
-                      };
-                    };
-
-                    extraArgs = lib.mkOption {
-                      type = lib.types.listOf lib.types.str;
-                      default = [ ];
-                      example = [
-                        "--temp"
-                        (builtins.toString 0.7)
-                        "--top-p"
-                        (builtins.toString 0.8)
-                        "--presence-penalty"
-                        (builtins.toString 1.5)
-                        "--top-k"
-                        (builtins.toString 20)
-                        "--chat-template-kwargs"
-                        "'{\"enable_thinking\": false}'"
-                      ];
-                      description = ''
-                        Additional arguments to pass to llama-server.
-                      '';
-                    };
-                  };
-                };
-
-                config = lib.mkIf cfg.enable {
-                  users.groups.llama-cpp = { };
-                  users.users.llama-cpp = {
-                    isSystemUser = true;
-                    group = "llama-cpp";
-                  };
-
-                  systemd.services.llama-cpp = {
-                    wantedBy = [ "multi-user.target" ];
-                    description = "llama.cpp model server";
-                    after = [ "network.target" ];
-                    serviceConfig = {
-                      ExecStart =
-                        let
-                          args = [
-                            "--host"
-                            "\"${cfg.host}\""
-                            "--port"
-                            (builtins.toString cfg.port)
-                            "--model"
-                            "\"${cfg.model}\""
-                            (lib.optionalString cfg.jinja.enable "--jinja")
-                          ];
-                        in
-                        "${lib.getExe' cfg.package "llama-server"} ${builtins.concatStringsSep " " args}";
-                      User = "llama-cpp";
-                      Group = "llama-cpp";
-                    };
-                  };
-                };
-              }
-            )
           ];
 
           config =
@@ -145,6 +31,7 @@
             in
             {
               services.llama-cpp.enable = true;
+              services.llama-cpp.package = args.lib.mkDefault pkgs.llama-cpp-vulkan;
 
               hardware.graphics.enable = true;
 
