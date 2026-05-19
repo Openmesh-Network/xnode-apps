@@ -2,6 +2,7 @@
   inputs = {
     vllm-omni.url = "github:Openmesh-Network/xnode-packages?dir=vllm-omni/xpu";
     vllm.follows = "vllm-omni/vllm";
+    intel-oneapi-toolkit.follows = "vllm/intel-oneapi-toolkit";
     nixpkgs.follows = "vllm/nixpkgs";
     xnodeos = {
       url = "github:Openmesh-Network/xnodeos/WIP";
@@ -24,6 +25,9 @@
 
             services.vllm.enable = true;
             services.vllm.package = inputs.vllm-omni.packages.${pkgs.stdenv.hostPlatform.system}.vllm-omni;
+            systemd.services.vllm.path = [
+              inputs.intel-oneapi-toolkit.packages.${pkgs.stdenv.hostPlatform.system}.intel-ocloc
+            ];
             systemd.services.vllm.environment = {
               "LD_LIBRARY_PATH" = "/run/opengl-driver/lib:${
                 inputs.vllm-omni.extras.${pkgs.stdenv.hostPlatform.system}.venv
@@ -33,6 +37,7 @@
               "CC" = "${pkgs.llvmPackages.stdenv.cc}/bin/cc";
               "CXX" = "${pkgs.llvmPackages.stdenv.cc}/bin/c++";
               "UR_L0_ENABLE_RELAXED_ALLOCATION_LIMITS" = "1";
+              "VLLM_XPU_ENABLE_XPU_GRAPH" = "1";
             };
 
             hardware.graphics = {
