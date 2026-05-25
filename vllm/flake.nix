@@ -1,13 +1,10 @@
 {
   inputs = {
+    xnodeos.url = "github:Openmesh-Network/xnodeos/v1";
+    nixpkgs.follows = "xnodeos/nixpkgs";
     vllm-omni.url = "github:Openmesh-Network/xnode-packages?dir=vllm-omni/xpu";
     vllm.follows = "vllm-omni/vllm";
     intel-oneapi-toolkit.follows = "vllm/intel-oneapi-toolkit";
-    nixpkgs.follows = "vllm/nixpkgs";
-    xnodeos = {
-      url = "github:Openmesh-Network/xnodeos/WIP";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs: {

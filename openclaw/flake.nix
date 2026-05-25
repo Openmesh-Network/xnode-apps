@@ -1,11 +1,8 @@
 {
   inputs = {
+    xnodeos.url = "github:Openmesh-Network/xnodeos/v1";
+    nixpkgs.follows = "xnodeos/nixpkgs";
     openclaw.url = "github:openclaw/nix-openclaw";
-    nixpkgs.follows = "openclaw/nixpkgs";
-    xnodeos = {
-      url = "github:Openmesh-Network/xnodeos/WIP";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs: {

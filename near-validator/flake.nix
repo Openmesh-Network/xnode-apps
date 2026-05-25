@@ -1,11 +1,8 @@
 {
   inputs = {
+    xnodeos.url = "github:Openmesh-Network/xnodeos/v1";
+    nixpkgs.follows = "xnodeos/nixpkgs";
     near-validator.url = "github:Openmesh-Network/near-validator";
-    nixpkgs.follows = "near-validator/nixpkgs";
-    xnodeos = {
-      url = "github:Openmesh-Network/xnodeos/WIP";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs: {

@@ -1,10 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-    xnodeos = {
-      url = "github:Openmesh-Network/xnodeos/WIP";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    xnodeos.url = "github:Openmesh-Network/xnodeos/v1";
+    nixpkgs.follows = "xnodeos/nixpkgs";
   };
 
   outputs = inputs: {
@@ -19,7 +16,7 @@
           config = {
             nixpkgs.config.allowUnfreePredicate =
               pkg: builtins.elem (args.lib.getName pkg) [ "minecraft-server" ];
-              
+
             services.minecraft-server.enable = true;
             services.minecraft-server.eula = true;
             services.minecraft-server.declarative = true;
