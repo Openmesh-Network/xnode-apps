@@ -291,14 +291,15 @@
       "inputs": {
         "near-cli": "near-cli",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1776779113,
-        "narHash": "sha256-QibDaztmTAszzC+dFAbk6ArP5ZzqMu4Z0K1Qga6BHSs=",
+        "lastModified": 1780602577,
+        "narHash": "sha256-BBgB7JhqvB1httTqI5Xv8hBDdoPmrRPrZ7ron86lMsk=",
         "owner": "Openmesh-Network",
         "repo": "near-validator",
-        "rev": "fdbce010ad0c205a302ec01be0ea2e0509a5cdbc",
+        "rev": "3c45434d83d42f0cfefe3199b373d240fc3b3c43",
         "type": "github"
       },
       "original": {
@@ -330,6 +331,22 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "a82ccc39b39b621151d6732718e3e250109076fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1780749050,
+        "narHash": "sha256-3av0pIjlOWQ6rDbNOmpUSvbNnJkGORQKKjb4LtCZsIY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
         "type": "github"
       },
       "original": {
