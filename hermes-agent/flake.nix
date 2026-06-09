@@ -1,6 +1,6 @@
 {
   inputs = {
-    xnodeos.url = "github:Openmesh-Network/xnodeos/v1";
+    xnodeos.url = "github:Openmesh-Network/xnodeos/v2";
     nixpkgs.follows = "xnodeos/nixpkgs";
     hermes-agent.url = "github:NousResearch/hermes-agent";
   };

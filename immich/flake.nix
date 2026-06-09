@@ -1,6 +1,6 @@
 {
   inputs = {
-    xnodeos.url = "github:Openmesh-Network/xnodeos/v1";
+    xnodeos.url = "github:Openmesh-Network/xnodeos/v2";
     nixpkgs.follows = "xnodeos/nixpkgs";
   };
 
@@ -28,6 +28,8 @@
             in
             {
               services.immich.enable = true;
+              services.immich.host = "127.0.0.1";
+              services.immich.settings.server.externalDomain = args.lib.mkIf (domain != "") "https://${domain}";
 
               xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
@@ -39,8 +41,8 @@
               };
 
               # https://docs.immich.app/administration/reverse-proxy#nginx-example-config
-              services.nginx.virtualHosts.${domain}.locations."/" = {
-                extraConfig = ''
+              services.nginx.virtualHosts = args.lib.mkIf (domain != "") {
+                ${domain}.extraConfig = ''
                   client_max_body_size 50000M;
                   proxy_request_buffering off;
                   client_body_buffer_size 1024k;

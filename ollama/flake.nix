@@ -1,6 +1,6 @@
 {
   inputs = {
-    xnodeos.url = "github:Openmesh-Network/xnodeos/v1";
+    xnodeos.url = "github:Openmesh-Network/xnodeos/v2";
     nixpkgs.follows = "xnodeos/nixpkgs";
   };
 
@@ -31,12 +31,6 @@
               services.ollama.package = args.lib.mkDefault pkgs.ollama-vulkan;
               services.ollama.user = "ollama";
               services.ollama.host = "127.0.0.1";
-              services.nginx.virtualHosts.${domain}.locations."/" = {
-                recommendedProxySettings = false; # Sets Host which breaks our custom Host
-                extraConfig = ''
-                  proxy_set_header Host ${args.config.services.ollama.host}:${builtins.toString args.config.services.ollama.port};
-                '';
-              };
 
               hardware.graphics.enable = true;
 
@@ -47,6 +41,16 @@
                     port = args.config.services.ollama.port;
                   }
                 ];
+              };
+
+              # https://docs.ollama.com/faq#how-can-i-use-ollama-with-a-proxy-server
+              services.nginx.virtualHosts = args.lib.mkIf (domain != "") {
+                ${domain}.locations."/" = {
+                  recommendedProxySettings = false; # Sets Host which breaks our custom Host
+                  extraConfig = ''
+                    proxy_set_header Host ${args.config.services.ollama.host}:${builtins.toString args.config.services.ollama.port};
+                  '';
+                };
               };
 
               services.xnode-auth.domains = args.lib.mkIf (domain != "" && owner != "") {
