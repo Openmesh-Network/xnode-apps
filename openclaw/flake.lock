@@ -375,11 +375,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1780749050,
-        "narHash": "sha256-G5B1h4sOH4DN/RZ85xYi6zPm2MHdOrNMeUmMslZ28Qs=",
-        "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+        "lastModified": 1781577229,
+        "narHash": "sha256-rcUHdUtJEvMdNEl2Wq+YpHraHKfcer3KsBscpZEF2Yg=",
+        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1011622.a799d3e3886d/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1017464.567a49d1913c/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -411,11 +411,11 @@
         "qmd": "qmd"
       },
       "locked": {
-        "lastModified": 1780985617,
-        "narHash": "sha256-qUXiscmAPjcjV0yGANh9ZuivOBNBckVEpexb7phihgc=",
+        "lastModified": 1781670889,
+        "narHash": "sha256-AyKaznhWKd2+WBqTJbxQaJC9I/cSR6iGZ2N2kbyGWT0=",
         "owner": "openclaw",
         "repo": "nix-openclaw",
-        "rev": "22c81f70a5369f9b1f74bda589b3c526db575069",
+        "rev": "39bc88a8c6214b28f2e7043629239f6da808af69",
         "type": "github"
       },
       "original": {
@@ -675,11 +675,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780945361,
-        "narHash": "sha256-j/kianRWI/OW1BsWrIiB+8YAi/98vTgv66wV/iPZXwY=",
+        "lastModified": 1781545199,
+        "narHash": "sha256-xB60CvKlbQeiuVtxCa8wLQ7R9PyUzqf06fOM8WrzDr4=",
         "owner": "Openmesh-Network",
         "repo": "xnode-manager",
-        "rev": "ec24fe9de7b8768494dcfc2fb4a505b3a2ad36be",
+        "rev": "dc271304bb1811eddc04b2a2efdeab8155f8f250",
         "type": "github"
       },
       "original": {
@@ -698,11 +698,11 @@
         "xnode-manager": "xnode-manager"
       },
       "locked": {
-        "lastModified": 1780945410,
-        "narHash": "sha256-IQq31ctuzIzG/ZOgKKJKBrQS34Pp54kB2LZ8KJLJ228=",
+        "lastModified": 1781791629,
+        "narHash": "sha256-aolgm2D2cInQYa2ZNRdwfrnXQ7Ioi7lKF+wThV5/DGM=",
         "owner": "Openmesh-Network",
         "repo": "xnodeos",
-        "rev": "dc192ac7880b6bc85185de5d500278e5b48a533a",
+        "rev": "4b4e1fd05c661d219b8d0a041dc10d424e9a04de",
         "type": "github"
       },
       "original": {

@@ -40,15 +40,6 @@
                 ];
               };
 
-              # https://docs.immich.app/administration/reverse-proxy#nginx-example-config
-              services.nginx.virtualHosts = args.lib.mkIf (domain != "") {
-                ${domain}.extraConfig = ''
-                  client_max_body_size 50000M;
-                  proxy_request_buffering off;
-                  client_body_buffer_size 1024k;
-                '';
-              };
-
               services.xnode-auth.domains = args.lib.mkIf (domain != "" && owner != "") {
                 ${domain} = {
                   accessList = {

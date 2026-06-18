@@ -28,6 +28,7 @@
             in
             {
               services.vaultwarden.enable = true;
+              services.vaultwarden.config.DOMAIN = args.lib.mkIf (domain != "") "https://${domain}";
               services.vaultwarden.config.ROCKET_ADDRESS = "127.0.0.1";
               services.vaultwarden.config.ROCKET_PORT = 8222;
               services.vaultwarden.dbBackend = "postgresql";
