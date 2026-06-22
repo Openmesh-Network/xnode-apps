@@ -28,6 +28,7 @@
             in
             {
               services.openvscode-server.enable = true;
+              services.openvscode-server.withoutConnectionToken = true;
 
               xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
