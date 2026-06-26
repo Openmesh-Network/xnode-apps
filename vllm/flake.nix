@@ -20,7 +20,6 @@
           config = {
             nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (args.lib.getName pkg) [ "intel-ocl" ];
 
-            services.vllm.enable = true;
             services.vllm.package = inputs.vllm-omni.packages.${pkgs.stdenv.hostPlatform.system}.vllm-omni;
             systemd.services.vllm.path = [
               inputs.intel-oneapi-toolkit.packages.${pkgs.stdenv.hostPlatform.system}.intel-ocloc

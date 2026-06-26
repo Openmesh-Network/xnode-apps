@@ -3,14 +3,12 @@
     "cachix": {
       "inputs": {
         "devenv": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix"
         ],
         "flake-compat": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix"
         ],
@@ -70,8 +68,7 @@
         "flake-parts": "flake-parts",
         "nix-test-runner": "nix-test-runner",
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "nixpkgs"
         ],
@@ -122,8 +119,7 @@
     "devshell": {
       "inputs": {
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "nixpkgs"
@@ -188,11 +184,35 @@
         "type": "github"
       }
     },
+    "erpc": {
+      "inputs": {
+        "nixpkgs": [
+          "erpc",
+          "xnode-builders",
+          "nixpkgs"
+        ],
+        "xnode-builders": "xnode-builders"
+      },
+      "locked": {
+        "dir": "erpc",
+        "lastModified": 1782473787,
+        "narHash": "sha256-Wm0MBec5X85L+GG58OfWI6WAsFp2x88E/fDRLLmW5kc=",
+        "owner": "Openmesh-Network",
+        "repo": "xnode-packages",
+        "rev": "ed7c91fb2b4aabdca06bb452c25a5a706a71ec34",
+        "type": "github"
+      },
+      "original": {
+        "dir": "erpc",
+        "owner": "Openmesh-Network",
+        "repo": "xnode-packages",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "naersk",
           "nixpkgs"
@@ -268,8 +288,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "nixpkgs"
@@ -315,8 +334,7 @@
     "git-hooks": {
       "inputs": {
         "flake-compat": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "cachix",
@@ -324,8 +342,7 @@
         ],
         "gitignore": "gitignore",
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "cachix",
@@ -381,8 +398,7 @@
     "gitignore": {
       "inputs": {
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "cachix",
@@ -407,8 +423,7 @@
     "gitignore_2": {
       "inputs": {
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "pre-commit-hooks",
@@ -478,34 +493,11 @@
         "type": "github"
       }
     },
-    "intel-oneapi-toolkit": {
-      "inputs": {
-        "nixpkgs": [
-          "vllm-omni",
-          "vllm",
-          "xnode-builders",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "path": "../../intel-oneapi-toolkit",
-        "type": "path"
-      },
-      "original": {
-        "path": "../../intel-oneapi-toolkit",
-        "type": "path"
-      },
-      "parent": [
-        "vllm-omni",
-        "vllm"
-      ]
-    },
     "naersk": {
       "inputs": {
         "fenix": "fenix",
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "nixpkgs"
         ]
@@ -640,16 +632,14 @@
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "flake-compat"
         ],
         "gitignore": "gitignore_2",
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "crate2nix",
           "nixpkgs"
@@ -702,20 +692,17 @@
     "pyproject-build-systems": {
       "inputs": {
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "nixpkgs"
         ],
         "pyproject-nix": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "pyproject-nix"
         ],
         "uv2nix": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "uv2nix"
         ]
@@ -769,8 +756,7 @@
     "pyproject-nix": {
       "inputs": {
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "nixpkgs"
         ]
@@ -813,19 +799,11 @@
     },
     "root": {
       "inputs": {
-        "intel-oneapi-toolkit": [
-          "vllm",
-          "intel-oneapi-toolkit"
-        ],
+        "erpc": "erpc",
         "nixpkgs": [
           "xnodeos",
           "nixpkgs"
         ],
-        "vllm": [
-          "vllm-omni",
-          "vllm"
-        ],
-        "vllm-omni": "vllm-omni",
         "xnodeos": "xnodeos"
       }
     },
@@ -896,14 +874,12 @@
     "uv2nix": {
       "inputs": {
         "nixpkgs": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "nixpkgs"
         ],
         "pyproject-nix": [
-          "vllm-omni",
-          "vllm",
+          "erpc",
           "xnode-builders",
           "pyproject-nix"
         ]
@@ -946,48 +922,6 @@
       "original": {
         "owner": "pyproject-nix",
         "repo": "uv2nix",
-        "type": "github"
-      }
-    },
-    "vllm": {
-      "inputs": {
-        "intel-oneapi-toolkit": "intel-oneapi-toolkit",
-        "xnode-builders": "xnode-builders"
-      },
-      "locked": {
-        "path": "../../vllm/xpu",
-        "type": "path"
-      },
-      "original": {
-        "path": "../../vllm/xpu",
-        "type": "path"
-      },
-      "parent": [
-        "vllm-omni"
-      ]
-    },
-    "vllm-omni": {
-      "inputs": {
-        "vllm": "vllm",
-        "xnode-builders": [
-          "vllm-omni",
-          "vllm",
-          "xnode-builders"
-        ]
-      },
-      "locked": {
-        "dir": "vllm-omni/xpu",
-        "lastModified": 1782473787,
-        "narHash": "sha256-Wm0MBec5X85L+GG58OfWI6WAsFp2x88E/fDRLLmW5kc=",
-        "owner": "Openmesh-Network",
-        "repo": "xnode-packages",
-        "rev": "ed7c91fb2b4aabdca06bb452c25a5a706a71ec34",
-        "type": "github"
-      },
-      "original": {
-        "dir": "vllm-omni/xpu",
-        "owner": "Openmesh-Network",
-        "repo": "xnode-packages",
         "type": "github"
       }
     },
