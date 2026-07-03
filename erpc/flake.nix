@@ -29,11 +29,11 @@
                   "";
             in
             {
-              services.erpc.config = args.lib.mkDefault {
+              services.erpc.config = {
                 server = {
-                  listenV4 = true;
-                  httpHostV4 = "127.0.0.1";
-                  httpPortV4 = 4000;
+                  listenV4 = args.lib.mkDefault true;
+                  httpHostV4 = args.lib.mkDefault "127.0.0.1";
+                  httpPortV4 = args.lib.mkDefault 4000;
                 };
               };
 

@@ -195,11 +195,11 @@
       },
       "locked": {
         "dir": "erpc",
-        "lastModified": 1782473787,
-        "narHash": "sha256-Wm0MBec5X85L+GG58OfWI6WAsFp2x88E/fDRLLmW5kc=",
+        "lastModified": 1782748314,
+        "narHash": "sha256-lWv9y/YMmi7UiqMWceun/W0j5s8vQzBN6UaUHmJlVqs=",
         "owner": "Openmesh-Network",
         "repo": "xnode-packages",
-        "rev": "ed7c91fb2b4aabdca06bb452c25a5a706a71ec34",
+        "rev": "793122135ad00288cecd5111066f3e4905b37f5a",
         "type": "github"
       },
       "original": {
