@@ -47,6 +47,9 @@
               };
 
               services.sunshine.enable = true;
+              services.sunshine.settings.sunshine_name = "Xnode Desktop";
+              services.sunshine.settings.bind_address = "127.0.0.1";
+              services.sunshine.settings.origin_web_ui_allowed = "pc";
 
               services.avahi.enable = false;
 
@@ -190,22 +193,59 @@
                 serviceConfig = {
                   ExecStart = "${args.lib.getExe args.config.programs.sway.package} --config ${pkgs.writeText "sway-config" ''
                     include /etc/sway/config
+
+                    # https://github.com/daaaaan/sunshine-headless-sway/blob/master/sway-sunshine/config
+                    # Default headless output - 1080p fallback, Sunshine prep commands override this
+                    output HEADLESS-1 resolution 1920x1080@60Hz
+
+                    # Performance tuning
+                    output * allow_tearing yes
+                    output * max_render_time off
+
+                    # Dark background
+                    exec swaybg -c '#1a1a2e'
                   ''}";
                   Restart = "on-failure";
                 };
               };
+              services.sunshine.settings.capture = "wlr";
+              services.sunshine.settings.global_prep_cmd = builtins.toJSON [
+                {
+                  do = args.lib.getExe (
+                    pkgs.writeShellScriptBin "sunshine-prep-sway-resolution" ''
+                      ${args.lib.getExe' pkgs.sway "swaymsg"} output HEADLESS-1 mode ''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS:-60}Hz
+                    ''
+                  );
+                }
+              ];
 
               services.pipewire = {
                 enable = true;
                 audio.enable = true;
                 pulse.enable = true;
+                extraConfig.pipewire."91-sunshine-sink".context.objects = [
+                  {
+                    factory = "adapter";
+                    args = {
+                      factory.name = "support.null-audio-sink";
+                      node.name = "sink-sunshine-stereo";
+                      node.description = "Sunshine Streaming Sink (Stereo)";
+                      media.class = "Audio/Sink";
+                      audio.position = [
+                        "FL"
+                        "FR"
+                      ];
+                      monitor.channel-volumes = true;
+                    };
+                  }
+                ];
               };
+              services.sunshine.settings.audio_sink = "sink-sunshine-stereo";
+
               xdg.portal = {
                 enable = true;
                 wlr.enable = true;
               };
-
-              services.sunshine.settings.capture = "wlr";
 
               users.users.xnode = {
                 isNormalUser = true;
