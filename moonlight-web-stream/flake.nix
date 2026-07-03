@@ -170,46 +170,42 @@
                 ];
               };
 
-              services.desktopManager.plasma6.enable = true;
-              systemd.user.services.kde-headless = {
-                description = "Headless KDE Session with Virtual Monitor";
+              programs.sway.enable = true;
+              programs.sway.extraSessionCommands = ''
+                export WLR_BACKENDS=headless,libinput;
+                export WLR_LIBINPUT_NO_DEVICES=1;
+                export LIBSEAT_BACKEND=noop;
+                export WLR_SCENE_DISABLE_DIRECT_SCANOUT=0;
+                export WLR_NO_HARDWARE_CURSORS=1;
+              '';
+              systemd.user.services.sway-headless = {
+                description = "Headless sway";
                 wantedBy = [ "default.target" ];
-                after = [
-                  "pipewire.service"
-                  "wireplumber.service"
-                  "dbus.service"
-                ];
-                requires = [
-                  "pipewire.service"
-                  "wireplumber.service"
-                  "dbus.service"
-                ];
-                path = [
-                  (pkgs.writeShellScriptBin "kwin_wayland" ''
-                    echo "Using injected virtual kwin_wayland wrapper"
-                    exec ${args.lib.getExe' pkgs.kdePackages.kwin "kwin_wayland"} \
-                      --virtual --width 1920 --height 1080 --no-lockscreen \
-                      "$@"
-                  '')
-                ];
-                environment = {
-                  LIBSEAT_BACKEND = "noop";
-                };
+                requires = [ "dbus.socket" ];
+                after = [ "dbus.socket" ];
+                path = args.config.environment.systemPackages;
                 unitConfig = {
                   ConditionUser = "!root";
                 };
                 serviceConfig = {
-                  ExecStart = args.lib.getExe' pkgs.kdePackages.plasma-workspace "startplasma-wayland";
+                  ExecStart = "${args.lib.getExe args.config.programs.sway.package} --config ${pkgs.writeText "sway-config" ''
+                    include /etc/sway/config
+                  ''}";
                   Restart = "on-failure";
                 };
               };
 
               services.pipewire = {
+                enable = true;
                 audio.enable = true;
                 pulse.enable = true;
               };
+              xdg.portal = {
+                enable = true;
+                wlr.enable = true;
+              };
 
-              services.sunshine.settings.capture = "kwin";
+              services.sunshine.settings.capture = "wlr";
 
               users.users.xnode = {
                 isNormalUser = true;
