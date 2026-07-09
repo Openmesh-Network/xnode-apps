@@ -213,7 +213,7 @@
                 {
                   do = args.lib.getExe (
                     pkgs.writeShellScriptBin "sunshine-prep-sway-resolution" ''
-                      ${args.lib.getExe' pkgs.sway "swaymsg"} output HEADLESS-1 mode ''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS:-60}Hz
+                      ${args.lib.getExe' pkgs.sway "swaymsg"} output HEADLESS-1 mode ''${SUNSHINE_CLIENT_WIDTH:-1920}x''${SUNSHINE_CLIENT_HEIGHT:-1080}@''${SUNSHINE_CLIENT_FPS:-60}Hz
                     ''
                   );
                 }

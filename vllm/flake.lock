@@ -62,6 +62,21 @@
         "type": "github"
       }
     },
+    "crane": {
+      "locked": {
+        "lastModified": 1781825982,
+        "narHash": "sha256-SlXKwIRIhrOSAcTjCB3ftPLzJWZStQIPS7J1FlZPnKk=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "469fd08d0bcf6926321fa973c6777fbc87785dd7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
     "crate2nix": {
       "inputs": {
         "cachix": "cachix",
@@ -597,11 +612,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1781577229,
-        "narHash": "sha256-rcUHdUtJEvMdNEl2Wq+YpHraHKfcer3KsBscpZEF2Yg=",
-        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
+        "lastModified": 1782467914,
+        "narHash": "sha256-inDx/w70OSJoJPqtKh0BrzAsbZZhpya7YgS43jHnhwg=",
+        "rev": "e73de5be04e0eff4190a1432b946d469c794e7b4",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1017464.567a49d1913c/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1022855.e73de5be04e0/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -977,11 +992,11 @@
       },
       "locked": {
         "dir": "vllm-omni/xpu",
-        "lastModified": 1782748314,
-        "narHash": "sha256-lWv9y/YMmi7UiqMWceun/W0j5s8vQzBN6UaUHmJlVqs=",
+        "lastModified": 1783611580,
+        "narHash": "sha256-ZhHdo0YknFn/lhDQDhUdu0s7sS9rhsTSFEWG5jJpFaM=",
         "owner": "Openmesh-Network",
         "repo": "xnode-packages",
-        "rev": "793122135ad00288cecd5111066f3e4905b37f5a",
+        "rev": "b7e7b6e60867d44bd9f5a3530fe1c7ff35ba8112",
         "type": "github"
       },
       "original": {
@@ -1015,6 +1030,7 @@
     },
     "xnode-builders": {
       "inputs": {
+        "crane": "crane",
         "crate2nix": "crate2nix",
         "naersk": "naersk",
         "nixpkgs": "nixpkgs_2",
@@ -1024,11 +1040,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1782465259,
-        "narHash": "sha256-BXArByLcc9APl4hejAuPkaDwflZnRPeh4Mw5XINFp1Y=",
+        "lastModified": 1782727373,
+        "narHash": "sha256-/4Q3pP5ixEUgikgHz0urDm7oJCvL5E5ZVsrLQZqoS8g=",
         "owner": "Openmesh-Network",
         "repo": "xnode-builders",
-        "rev": "ad696c206f21c0904a2762690efc80c474ec9088",
+        "rev": "c8c9928d4188f6337de87e91382ce63a7bc89fb2",
         "type": "github"
       },
       "original": {
