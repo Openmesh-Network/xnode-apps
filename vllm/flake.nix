@@ -17,64 +17,102 @@
             inputs.xnodeos.nixosModules.app
           ];
 
-          config = {
-            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (args.lib.getName pkg) [ "intel-ocl" ];
+          config =
+            let
+              domain =
+                if (builtins.pathExists "${args.config.xnode.xnode-config}/domain") then
+                  builtins.readFile "${args.config.xnode.xnode-config}/domain"
+                else
+                  "";
+              owner =
+                if (builtins.pathExists "${args.config.xnode.xnode-config}/owner") then
+                  builtins.readFile "${args.config.xnode.xnode-config}/owner"
+                else
+                  "";
+            in
+            {
+              nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (args.lib.getName pkg) [ "intel-ocl" ];
 
-            services.vllm.package = inputs.vllm-omni.packages.${pkgs.stdenv.hostPlatform.system}.vllm-omni;
-            systemd.services.vllm.path = [
-              inputs.intel-oneapi-toolkit.packages.${pkgs.stdenv.hostPlatform.system}.intel-ocloc
-            ];
-            systemd.services.vllm.environment = {
-              "LD_LIBRARY_PATH" = "/run/opengl-driver/lib:${
-                inputs.vllm-omni.extras.${pkgs.stdenv.hostPlatform.system}.venv
-              }/lib:${pkgs.libsndfile.out}/lib";
-              "LIBRARY_PATH" = "${pkgs.level-zero}/lib";
-              "CPATH" = "${pkgs.level-zero}/include";
-              "CC" = "${pkgs.llvmPackages.stdenv.cc}/bin/cc";
-              "CXX" = "${pkgs.llvmPackages.stdenv.cc}/bin/c++";
-              "UR_L0_ENABLE_RELAXED_ALLOCATION_LIMITS" = "1";
-              "VLLM_XPU_ENABLE_XPU_GRAPH" = "1";
-            };
-
-            hardware.graphics = {
-              enable = true;
-              extraPackages = [
-                pkgs.intel-compute-runtime
-                pkgs.intel-compute-runtime.drivers
-                pkgs.level-zero
-                pkgs.intel-graphics-compiler
-                pkgs.intel-ocl
-                pkgs.ocl-icd
+              services.vllm.package = inputs.vllm-omni.packages.${pkgs.stdenv.hostPlatform.system}.vllm-omni;
+              systemd.services.vllm.path = [
+                inputs.intel-oneapi-toolkit.packages.${pkgs.stdenv.hostPlatform.system}.intel-ocloc
               ];
-            };
+              systemd.services.vllm.environment = {
+                "LD_LIBRARY_PATH" = "/run/opengl-driver/lib:${
+                  inputs.vllm-omni.extras.${pkgs.stdenv.hostPlatform.system}.venv
+                }/lib:${pkgs.libsndfile.out}/lib";
+                "LIBRARY_PATH" = "${pkgs.level-zero}/lib";
+                "CPATH" = "${pkgs.level-zero}/include";
+                "CC" = "${pkgs.llvmPackages.stdenv.cc}/bin/cc";
+                "CXX" = "${pkgs.llvmPackages.stdenv.cc}/bin/c++";
+                "UR_L0_ENABLE_RELAXED_ALLOCATION_LIMITS" = "1";
+                "VLLM_XPU_ENABLE_XPU_GRAPH" = "1";
+              };
 
-            xnode.manager = {
-              permission = {
-                container = {
-                  bind = {
-                    "/dev/dri" = {
-                      path = "/dev/dri";
-                      readonly = true;
-                    };
-                  };
-                  device = {
-                    allow = {
-                      "char-drm" = {
-                        read = true;
-                        write = true;
-                        mknod = false;
+              hardware.graphics = {
+                enable = true;
+                extraPackages = [
+                  pkgs.intel-compute-runtime
+                  pkgs.intel-compute-runtime.drivers
+                  pkgs.level-zero
+                  pkgs.intel-graphics-compiler
+                  pkgs.intel-ocl
+                  pkgs.ocl-icd
+                ];
+              };
+
+              xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
+                ${domain}."/".locations = [
+                  {
+                    domain = "127.0.0.1";
+                    port = 8000;
+                  }
+                ];
+              };
+
+              services.xnode-auth.domains = args.lib.mkIf (domain != "" && owner != "") {
+                ${domain} = {
+                  accessList = {
+                    users = {
+                      ${owner} = {
+                        roles = [ "owner" ];
                       };
                     };
+                    roles = {
+                      "owner" = { };
+                    };
                   };
-                  extra_args = [
-                    "--network-veth"
-                    "--private-users=managed"
-                    "--private-users-ownership=foreign"
-                  ];
+                  paths = builtins.attrNames args.config.xnode.reverse-proxy.https.${domain};
+                };
+              };
+
+              xnode.manager = {
+                permission = {
+                  container = {
+                    bind = {
+                      "/dev/dri" = {
+                        path = "/dev/dri";
+                        readonly = true;
+                      };
+                    };
+                    device = {
+                      allow = {
+                        "char-drm" = {
+                          read = true;
+                          write = true;
+                          mknod = false;
+                        };
+                      };
+                    };
+                    extra_args = [
+                      "--network-veth"
+                      "--private-users=managed"
+                      "--private-users-ownership=foreign"
+                    ];
+                  };
                 };
               };
             };
-          };
         };
     };
   };
