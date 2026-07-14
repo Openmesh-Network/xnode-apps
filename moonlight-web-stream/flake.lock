@@ -513,11 +513,11 @@
       },
       "locked": {
         "dir": "moonlight-web-stream",
-        "lastModified": 1783611580,
-        "narHash": "sha256-ZhHdo0YknFn/lhDQDhUdu0s7sS9rhsTSFEWG5jJpFaM=",
+        "lastModified": 1784051047,
+        "narHash": "sha256-cIxIH80feAsxmno1p4iUmpOz+Huc1Oab9fYLm5y5GKg=",
         "owner": "Openmesh-Network",
         "repo": "xnode-packages",
-        "rev": "b7e7b6e60867d44bd9f5a3530fe1c7ff35ba8112",
+        "rev": "be178c9d0b2a6f87e2de4c2225b8cfa2b18615f2",
         "type": "github"
       },
       "original": {
