@@ -1007,11 +1007,11 @@
       },
       "locked": {
         "dir": "vllm-omni/xpu",
-        "lastModified": 1784051047,
-        "narHash": "sha256-cIxIH80feAsxmno1p4iUmpOz+Huc1Oab9fYLm5y5GKg=",
+        "lastModified": 1785879580,
+        "narHash": "sha256-Ri5XVf64FAzGQe+QPTZWQHCfs51Kx/puKlWJeZnZSwE=",
         "owner": "Openmesh-Network",
         "repo": "xnode-packages",
-        "rev": "be178c9d0b2a6f87e2de4c2225b8cfa2b18615f2",
+        "rev": "a562f282c0f216cd8a0d3799f0147c19237e4b3f",
         "type": "github"
       },
       "original": {
