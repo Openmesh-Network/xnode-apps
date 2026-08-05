@@ -43,6 +43,8 @@
                   users.users.stable-diffusion-cpp = {
                     isSystemUser = true;
                     group = "stable-diffusion-cpp";
+                    home = "/var/lib/stable-diffusion-cpp";
+                    createHome = true;
                   };
                   systemd.services.stable-diffusion-cpp = {
                     wantedBy = [ "multi-user.target" ];
@@ -51,6 +53,8 @@
                       Restart = args.lib.mkDefault "on-failure";
                       User = "stable-diffusion-cpp";
                       Group = "stable-diffusion-cpp";
+                      WorkingDirectory = "/var/lib/stable-diffusion-cpp";
+                      StateDirectory = "stable-diffusion-cpp";
                     };
                   };
                 };
