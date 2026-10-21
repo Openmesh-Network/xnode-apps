@@ -1,0 +1,1 @@
+services.forgejo.settings.service.DISABLE_REGISTRATION = false;
