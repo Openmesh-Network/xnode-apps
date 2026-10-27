@@ -35,7 +35,6 @@
               services.forgejo.database.type = "postgres";
 
               services.forgejo.lfs.enable = true;
-              services.forgejo.settings.actions.ENABLED = true;
 
               xnode.reverse-proxy.https = args.lib.mkIf (domain != "") {
                 ${domain}."/".locations = [
