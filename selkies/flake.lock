@@ -852,11 +852,11 @@
       },
       "locked": {
         "dir": "selkies",
-        "lastModified": 1793131837,
-        "narHash": "sha256-NIotkfhtLlAVV3bTgJQp2SHtGM6Cduk2SKJJTQ6gbXM=",
+        "lastModified": 1793799732,
+        "narHash": "sha256-Kjn16mQWgNYDJUVNmhAD72BOGqOq6U+Hp67DP+qomnc=",
         "owner": "Openmesh-Network",
         "repo": "xnode-packages",
-        "rev": "cfa5da60bb64fdd7f33cea2a0b8336357e0e4b8c",
+        "rev": "be518ce057c13030510b854415be93625d637df1",
         "type": "github"
       },
       "original": {
@@ -984,11 +984,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1793131191,
-        "narHash": "sha256-aE2hjmeS0yD7TjL5DihEcs+n/4PlVDwn4tfR2hcI25w=",
+        "lastModified": 1793799713,
+        "narHash": "sha256-P44e+CxloZUHvd7BchK1qVXzwVfTz8SAhYcrpi30u7M=",
         "owner": "Openmesh-Network",
         "repo": "xnode-builders",
-        "rev": "4b282cd9f8112415aecf232bfeb3e1eae3a4777c",
+        "rev": "0f39674be7058cbbec7c16d5391da03555af8a78",
         "type": "github"
       },
       "original": {

@@ -30,8 +30,83 @@
             in
             {
               services.selkies.args = [
+                "session"
+                "--session=${pkgs.writeShellScript "labwc-wrapped" ''
+                  exec ${args.lib.getExe args.config.programs.labwc.package} -C ${
+                    pkgs.linkFarm "labwc-config" [
+                      {
+                        # https://docs.noctalia.dev/noctalia/compositor-settings/labwc/
+                        name = "rc.xml";
+                        path =
+                          (pkgs.formats.xml {
+                            format = "badgerfish";
+                            withHeader = true;
+                          }).generate
+                            "rc.xml"
+                            {
+                              labwc_config = {
+                                core.gap = "10";
+                                windowSwitcher = {
+                                  "@preview" = "no";
+                                  "@outlines" = "yes";
+                                  osd = {
+                                    "@style" = "thumbnail";
+                                  };
+                                };
+                                mouse = [
+                                  { default = { }; }
+                                  {
+                                    context = {
+                                      "@name" = "Root";
+                                      mousebind = [
+                                        {
+                                          "@button" = "Left";
+                                          "@action" = "Press";
+                                          action = {
+                                            "@name" = "None";
+                                          };
+                                        }
+                                        {
+                                          "@button" = "Right";
+                                          "@action" = "Press";
+                                          action = {
+                                            "@name" = "None";
+                                          };
+                                        }
+                                      ];
+                                    };
+                                  }
+                                ];
+                              };
+                            };
+                      }
+                      {
+                        name = "autostart";
+                        path = pkgs.writeShellScript "labwc-autostart" ''
+                          export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+                          export DBUS_SESSION_BUS_ADDRESS="unix:path=''${XDG_RUNTIME_DIR}/bus"
+                          LABWC_SOCKET=$(find "$XDG_RUNTIME_DIR"/selkies-session-* -maxdepth 1 -name 'wayland-*' -type s 2>/dev/null | head -1)
+                          WAYLAND_DISPLAY=$LABWC_SOCKET systemctl --user import-environment WAYLAND_DISPLAY
+                          systemctl --user --no-block start labwc-session.target
+                        '';
+                      }
+                      {
+                        name = "shutdown";
+                        path = pkgs.writeShellScript "labwc-shutdown" ''
+                          export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+                          export DBUS_SESSION_BUS_ADDRESS="unix:path=''${XDG_RUNTIME_DIR}/bus"
+                          systemctl --user stop graphical-session.target
+                        '';
+                      }
+                    ]
+                  } "$@"
+                ''}"
                 "--port=8080"
                 "--enable-basic-auth=false"
+              ];
+              systemd.user.services.selkies.path = [
+                pkgs.bash
+                args.config.services.pulseaudio.package
               ];
               systemd.user.services.selkies.environment.SELKIES_WAYLAND = "true";
 
@@ -44,41 +119,65 @@
                 ];
               };
 
-              programs.sway.enable = true;
-              programs.sway.extraSessionCommands = ''
-                export WLR_BACKENDS=headless,libinput;
-                export WLR_LIBINPUT_NO_DEVICES=1;
-                export LIBSEAT_BACKEND=noop;
-                export WLR_SCENE_DISABLE_DIRECT_SCANOUT=0;
-                export WLR_NO_HARDWARE_CURSORS=1;
-              '';
-              systemd.user.services.sway-headless = {
-                description = "Headless sway";
-                wantedBy = [ "default.target" ];
-                requires = [ "dbus.socket" ];
-                after = [ "dbus.socket" ];
-                path = args.config.environment.systemPackages;
-                unitConfig = {
-                  ConditionUser = "!root";
-                };
-                serviceConfig = {
-                  ExecStart = "${args.lib.getExe args.config.programs.sway.package} --config ${pkgs.writeText "sway-config" ''
-                    include /etc/sway/config
+              programs.labwc.enable = true;
 
-                    # https://github.com/daaaaan/sunshine-headless-sway/blob/master/sway-sunshine/config
-                    # Default headless output - 1080p fallback, Sunshine prep commands override this
-                    output HEADLESS-1 resolution 1920x1080@60Hz
-
-                    # Performance tuning
-                    output * allow_tearing yes
-                    output * max_render_time off
-
-                    # Dark background
-                    exec swaybg -c '#1a1a2e'
-                  ''}";
-                  Restart = "on-failure";
-                };
+              # https://github.com/joske/labwc/blob/master/data/labwc-session.target
+              systemd.user.targets.labwc-session = {
+                description = "labwc session";
+                documentation = [
+                  "man:labwc(1)"
+                  "man:systemd.special(7)"
+                ];
+                bindsTo = [ "graphical-session.target" ];
+                wants = [ "graphical-session-pre.target" ];
+                after = [ "graphical-session-pre.target" ];
               };
+
+              programs.noctalia = {
+                enable = true;
+                systemd.enable = true;
+              };
+              systemd.tmpfiles.rules = [
+                "d /home/xnode/.config/noctalia 0755 xnode xnode -"
+                "L+ /home/xnode/.config/noctalia/config.toml - - - - ${
+                  (pkgs.formats.toml { }).generate "noctalia-config.toml" {
+                    bar.default = {
+                      auto_hide = true;
+                      reserve_space = false;
+                      background_opacity = 0.85;
+                      margin_ends = 0;
+                      start = [ ];
+                      center = [
+                        "media"
+                        "clock"
+                      ];
+                      end = [
+                        "tray"
+                        "clipboard"
+                        "notifications"
+                      ];
+                    };
+                    shell = {
+                      setup_wizard_enabled = false;
+                      launch_apps_as_systemd_services = true;
+                    };
+                    dock = {
+                      enabled = true;
+                      icon_size = 36;
+                      auto_hide = true;
+                      reserve_space = false;
+                      launcher_position = "start";
+                      pinned = builtins.map (
+                        p: p.meta.mainProgram or p.pname or (builtins.parseDrvName p.name).name
+                      ) args.config.users.users.xnode.packages;
+                    };
+                    control_center.sidebar_section = "none";
+                  }
+                }"
+              ];
+
+              services.pipewire.enable = false;
+              services.pulseaudio.enable = true;
 
               users.users.xnode = {
                 isNormalUser = true;
@@ -88,6 +187,7 @@
                   "input"
                   "video"
                   "render"
+                  "audio"
                 ];
               };
 
