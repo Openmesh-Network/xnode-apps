@@ -1,0 +1,4 @@
+systemd.services.ironclaw.environment."IRONCLAW_REBORN_WEBUI_TOKEN" = "PASTE TOKEN HERE"; # web UI login, at least 32 characters: openssl rand -hex 32
+systemd.services.ironclaw.environment."LLM_BASE_URL" = "https://txt2txt.xnode.local/v1";
+systemd.services.ironclaw.environment."LLM_MODEL" = "model-name";
+systemd.services.ironclaw.environment."LLM_API_KEY" = "secret";
