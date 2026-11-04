@@ -30,6 +30,8 @@
             in
             {
               services.selkies.args = [
+                "session"
+                "--session=labwc"
                 "--port=8080"
                 "--enable-basic-auth=false"
               ];
@@ -44,40 +46,43 @@
                 ];
               };
 
-              programs.sway.enable = true;
-              programs.sway.extraSessionCommands = ''
-                export WLR_BACKENDS=headless,libinput;
-                export WLR_LIBINPUT_NO_DEVICES=1;
-                export LIBSEAT_BACKEND=noop;
-                export WLR_SCENE_DISABLE_DIRECT_SCANOUT=0;
-                export WLR_NO_HARDWARE_CURSORS=1;
-              '';
-              systemd.user.services.sway-headless = {
-                description = "Headless sway";
-                wantedBy = [ "default.target" ];
-                requires = [ "dbus.socket" ];
-                after = [ "dbus.socket" ];
-                path = args.config.environment.systemPackages;
-                unitConfig = {
-                  ConditionUser = "!root";
-                };
-                serviceConfig = {
-                  ExecStart = "${args.lib.getExe args.config.programs.sway.package} --config ${pkgs.writeText "sway-config" ''
-                    include /etc/sway/config
+              programs.labwc.enable = true;
 
-                    # https://github.com/daaaaan/sunshine-headless-sway/blob/master/sway-sunshine/config
-                    # Default headless output - 1080p fallback, Sunshine prep commands override this
-                    output HEADLESS-1 resolution 1920x1080@60Hz
+              # https://github.com/joske/labwc/blob/master/data/labwc-session.target
+              systemd.user.targets.labwc-session = {
+                description = "labwc session";
+                documentation = [
+                  "man:labwc(1)"
+                  "man:systemd.special(7)"
+                ];
+                bindsTo = [ "graphical-session.target" ];
+                wants = [ "graphical-session-pre.target" ];
+                after = [ "graphical-session-pre.target" ];
+              };
+              systemd.tmpfiles.rules = [
+                "d /home/xnode/.config/labwc 0755 xnode users -"
+                "L+ /home/xnode/.config/labwc/environment 0755 xnode users - ${
+                  let
+                    uid = builtins.toString args.config.users.users.xnode.uid;
+                    XDG_RUNTIME_DIR = "/run/user/${uid}";
+                  in
+                  pkgs.writeText "labwc-environment" ''
+                    XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+                    DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+                    LABWC_UPDATE_ACTIVATION_ENV=1
+                  ''
+                }"
+                "L+ /home/xnode/.config/labwc/autostart 0755 xnode users - ${pkgs.writeText "labwc-autostart" ''
+                  systemctl --user --no-block start labwc-session.target
+                ''}"
+                "L+ /home/xnode/.config/labwc/shutdown 0755 xnode users - ${pkgs.writeText "labwc-shutdown" ''
+                  systemctl --user stop graphical-session.target
+                ''}"
+              ];
 
-                    # Performance tuning
-                    output * allow_tearing yes
-                    output * max_render_time off
-
-                    # Dark background
-                    exec swaybg -c '#1a1a2e'
-                  ''}";
-                  Restart = "on-failure";
-                };
+              programs.noctalia = {
+                enable = true;
+                systemd.enable = true;
               };
 
               users.users.xnode = {

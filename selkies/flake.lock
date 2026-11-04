@@ -852,11 +852,11 @@
       },
       "locked": {
         "dir": "selkies",
-        "lastModified": 1793131837,
-        "narHash": "sha256-NIotkfhtLlAVV3bTgJQp2SHtGM6Cduk2SKJJTQ6gbXM=",
+        "lastModified": 1793726839,
+        "narHash": "sha256-/HLgaOVXkS3rEMyLa9Nh2Im9D+iYrymg15yf4Q4kWMw=",
         "owner": "Openmesh-Network",
         "repo": "xnode-packages",
-        "rev": "cfa5da60bb64fdd7f33cea2a0b8336357e0e4b8c",
+        "rev": "d9f1a30245ff89894906fd83697a926fce665a68",
         "type": "github"
       },
       "original": {
