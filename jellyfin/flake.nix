@@ -40,18 +40,18 @@
 
               services.xnode-auth.domains = args.lib.mkIf (domain != "" && owner != "") {
                 ${domain} = {
-                  accessList = {
-                    users = {
-                      ${owner} = {
-                        roles = [ "owner" ];
-                      };
+                  users = {
+                    ${owner} = {
+                      roles = [ "owner" ];
                     };
-                    roles = {
-                      "owner" = { };
+                  };
+                  roles = {
+                    "owner" = {
+                      pathPatterns = [ [ ".*" ] ];
                     };
                   };
                 };
-                paths = builtins.attrNames args.config.xnode.reverse-proxy.https.${domain};
+                locations = builtins.attrNames args.config.xnode.reverse-proxy.https.${domain};
               };
             };
         };

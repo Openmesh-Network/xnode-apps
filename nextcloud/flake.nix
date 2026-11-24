@@ -49,17 +49,15 @@
 
               services.xnode-auth.domains = args.lib.mkIf (domain != "" && owner != "") {
                 ${domain} = {
-                  accessList = {
-                    users = {
-                      ${owner} = {
-                        roles = [ "owner" ];
-                      };
-                    };
-                    roles = {
-                      "owner" = { };
+                  users = {
+                    ${owner} = {
+                      roles = [ "owner" ];
                     };
                   };
-                  paths = [
+                  roles = {
+                    "owner" = { pathPatterns = [ [ ".*" ] ]; };
+                  };
+                  locations = [
                     "~ \\.php(?:$|/)"
                     "~ \\.(?:css|js|mjs|svg|gif|ico|jpg|jpeg|png|webp|wasm|tflite|map|html|ttf|bcmap|mp4|webm|ogg|flac)$"
                     "~ ^\\/(?:updater|ocs-provider)(?:$|\\/)"
